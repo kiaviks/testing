@@ -7,6 +7,7 @@
 	
 	<display-name>szecc test client</display-name>
 	
+	<!-- Web Servlet -->
 	<servlet>
 		<servlet-name>clientservlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -21,6 +22,27 @@
 		<servlet-name>clientservlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<!-- /Web Servlet -->
+	
+		<!-- Rest servlet -->
+		<!-- disabled because I am not able to maps url-pattern other than "/"
+			everything put into client servlet
+		<servlet>
+			<servlet-name>restservlet</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>/WEB-INF/spring/restservlet.xml</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+		
+		<servlet-mapping>
+			<servlet-name>restservlet</servlet-name>
+			<url-pattern>/rest/*</url-pattern>
+		</servlet-mapping>
+		 -->
+		<!-- /Rest servlet -->
 	
 	<!-- change default context config (/WEB-INF/applicationContext.xml) -->
 	<!-- needed for ContextLoaderListener -->

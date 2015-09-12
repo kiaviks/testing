@@ -11,17 +11,18 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
+	<import resource="rest-components.xml" />
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	
+	
 	<!-- Autowire components -->
 	<context:component-scan base-package="net.szecc.client" />
-	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 	<!-- /Autowire components -->
+	
 	
 	<!-- view resolvers (/WEB-INF/jsp/{viewName}.jsp) -->
 	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
@@ -35,6 +36,7 @@
 	</bean>
 	<!-- /view resolver -->
 	
+	
 	<!-- this Interceptor works only into the servlet conf and not into the appContext conf! -->
 	<!-- permit to change the locale via request param -->
 	<mvc:interceptors>
@@ -44,14 +46,15 @@
 		</bean>
 	</mvc:interceptors>
 	
+	
 	<!-- Exception management pages -->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-	<property name="exceptionMappings">
-		<props>
-			<prop key="java.lang.Exception">genericProblem</prop>
-			<prop key="java.lang.RuntimeException">genericProblem</prop>
-		</props>
-	</property>
-	<property name="defaultErrorView" ><value>genericProblem</value></property>
-</bean>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">genericProblem</prop>
+				<prop key="java.lang.RuntimeException">genericProblem</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" ><value>genericProblem</value></property>
+	</bean>
 </beans>
