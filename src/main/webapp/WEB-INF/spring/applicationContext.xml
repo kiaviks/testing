@@ -1,0 +1,50 @@
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		">
+	
+	<import resource="datasource-mysql.xml" />
+	
+	<!-- Services -->
+	<bean name="customerService" class="net.szecc.client.registration.BasicCustomerService" >
+		<property name="customerDao" ref="customerDao"/>
+	</bean>
+	<bean name="customerDao" class="net.szecc.client.registration.HibernateCustomerDao" />
+	
+	<!-- This messagesource reload periodically the property files -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/messages/message"/>
+		<property name="cacheSeconds" value="5" />
+	</bean>
+	
+	<!-- This messagesource is used as application properties source -->
+	<bean id="propertiesSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/messages/properties"/>
+		<property name="cacheSeconds" value="5" />
+	</bean>
+	
+	<!-- First time check the accept-language header. Then use a cookie. -->
+	<bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en"/>
+		<property name="cookieName" value="szecc.language"/>
+		<property name="cookieMaxAge" value="-1"/> <!-- browser is closed, otherwise seconds -->
+	</bean>	
+	
+	<!-- Every annotation-based controller will have access to this data binder -->
+	<bean id="annotationAdapter" 
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="net.szecc.client.registration.UserTypeInitializer" />
+		</property>
+	</bean>
+	
+</beans>

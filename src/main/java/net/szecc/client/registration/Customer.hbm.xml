@@ -1,0 +1,20 @@
+<!DOCTYPE hibernate-mapping
+PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping">
+<hibernate-mapping package="net.szecc.client.registration">
+	
+	<class name="Customer" table="CUSTOMER">
+		
+		<id name="id" type="long" column="ID">
+			<generator class="identity" />
+		</id>
+		
+		<property name="nickName" type="string" column="NICKNAME" length="20" not-null="true" />
+		
+		<property name="email" type="string" column="EMAIL" length="255" not-null="true" />
+
+		<property name="pwd" type="string" column="PWD" length="20" not-null="true" />
+		
+	</class>
+	
+</hibernate-mapping>
