@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		">
 	
-	<import resource="datasource-mysql.xml" />
+	<!-- <import resource="datasource-mysql.xml" /> -->
 	
 	<!-- Services -->
 	<bean name="customerService" class="net.szecc.client.registration.BasicCustomerService" >
